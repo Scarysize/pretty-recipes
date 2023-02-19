@@ -1,0 +1,16 @@
+{:paths ["src" "resources"]
+ :deps {clj-http/clj-http {:mvn/version "2.3.0"}
+        clojure.java-time/clojure.java-time {:mvn/version "1.2.0"}
+        compojure/compojure {:mvn/version "1.7.0"}
+        hiccup/hiccup {:mvn/version "1.0.5"}
+        http-kit/http-kit {:mvn/version "2.6.0"}
+        org.clj-commons/hickory {:mvn/version "0.7.3"}
+        org.clojure/java.jdbc {:mvn/version "0.7.12"}
+        org.clojure/tools.cli {:mvn/version "1.0.214"}
+        org.clojure/tools.logging {:mvn/version "1.2.4"}
+        ring-logger/ring-logger {:mvn/version "1.1.1"}
+        ring/ring-json {:mvn/version "0.5.1"}
+        org.xerial/sqlite-jdbc {:mvn/version "3.40.1.0"}}
+ :aliases {:uberdeps {:replace-deps {uberdeps/uberdeps {:mvn/version "1.2.0"}}
+                      :replace-paths []
+                      :main-opts ["-m" "uberdeps.uberjar"]}}}

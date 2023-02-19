@@ -1,0 +1,9 @@
+.calva
+.lsp
+.cpcache
+.clj-kondo
+target
+
+scripts
+
+*.db

@@ -1,0 +1,143 @@
+:root {
+  --color-neutral-dark: #222;
+  --color-neutral-light: #f2f2f2;
+  --color-beige: #faecd5;
+  --color-primary: #005b4c;
+}
+
+html,
+body {
+  background-color: var(--color-beige);
+}
+
+a,
+a:visited {
+  color: var(--color-primary);
+}
+
+header nav a:visited,
+header nav a {
+  color: var(--color-neutral-dark);
+  font-size: 20px;
+}
+
+header {
+  border-bottom: 1px solid var(--color-neutral-dark);
+}
+
+header nav {
+  margin-bottom: 0.9rem;
+}
+
+body > footer {
+  width: 100%;
+  max-width: none;
+  display: flex;
+  justify-content: center;
+}
+
+body > footer p {
+  margin: 0;
+  white-space: nowrap;
+}
+
+form {
+  margin-top: 20px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+input[type='url'] {
+  height: 30px;
+  padding: 2px 5px;
+  outline: none;
+  border: 1px solid var(--color-neutral-dark);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+input[type='submit'],
+button {
+  -webkit-appearance: none;
+  appearance: none;
+  font-size: 16px;
+  min-height: 30px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 5px;
+  color: var(--color-neutral-light);
+  background-color: var(--color-neutral-dark);
+  cursor: pointer;
+}
+
+.recipe h1,
+.collection h1 {
+  font-size: 1.5em;
+  line-height: 2rem;
+}
+
+.recipe h2 {
+  font-size: 1.5em;
+  line-height: 2rem;
+}
+
+.recipe .recipe-source-text {
+  word-break: break-all;
+}
+
+.heading-with-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.save-btn {
+  margin-top: 24px;
+  width: 75px;
+  background-color: var(--color-primary);
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.save-btn--saved {
+  background-color: var(--color-beige);
+  color: var(--color-neutral-dark);
+  border: 1px solid var(--color-neutral-dark);
+}
+
+#recipe-ingredients li,
+#recipe-directions li {
+  margin-bottom: 16px;
+}
+
+#recipe-directions {
+  font-size: 17px;
+  line-height: 28px;
+}
+
+ul ::marker {
+  color: var(--color-primary);
+  font-size: 20px;
+}
+
+#recipe-directions ::marker {
+  font-weight: bold;
+}
+
+.recipe-list li {
+  margin-bottom: 10px;
+}
+
+.recipe-list li a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.recipe-list .recipe-host {
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 600px) {
+}

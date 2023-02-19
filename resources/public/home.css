@@ -1,0 +1,41 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25vh;
+}
+
+body > footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.collection-link {
+  margin-top: 5px;
+  text-align: center;
+}
+
+.collection-link a {
+  text-decoration: underline;
+}
+
+.supported-sites ul {
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  form {
+    width: 260px;
+  }
+
+  p {
+    width: 260px;
+  }
+
+  footer p {
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+  }
+}
