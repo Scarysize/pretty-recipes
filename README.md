@@ -1,5 +1,10 @@
 # pretty-recipes
 
+# Requirements
+
+- [Clojure](https://clojure.org/guides/install_clojure)
+- [Java](https://clojure.org/guides/install_clojure#java)
+
 ## Runing locally
 
 ```
