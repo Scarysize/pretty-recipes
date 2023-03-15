@@ -7,6 +7,22 @@
 (defn remove-protocol [url]
   (str/replace-first url protocol-pattern ""))
 
+(defn lablled-ingredient [{:keys [text label]}]
+  [:span {:data-label label}
+   text
+   (if (= text "(")
+     ""
+     " ")])
+
+(defn ingredient-list [recipe]
+  (if-let [lablled (:labelled-ingredients recipe)]
+    [:ul {:id "recipe-ingredients" :class "ingredient-list--labelled"}
+     (for [l lablled]
+       [:li (map lablled-ingredient l)])]
+    [:ul {:id "recipe-ingredients"}
+     (for [i (:ingredients recipe)]
+       [:li i])]))
+
 (defn html-tree [recipe]
   [:html {:lang "en"}
    [:head
@@ -22,9 +38,7 @@
       [:h2 "Ingredients"]
       [:button {:class "save-btn" :onclick "saveRecipe(this)"} "Save"]]
 
-     [:ul {:id "recipe-ingredients"}
-      (for [i (:ingredients recipe)]
-        [:li i])]
+     (ingredient-list recipe)
 
      [:h2 "Directions"]
      [:ol {:id "recipe-directions"}

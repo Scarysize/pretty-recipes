@@ -9,13 +9,21 @@ STOP_WORDS = set(stopwords.words('english'))
 
 TOKENIZER = nltk.tokenize.RegexpTokenizer(r"[\w\.\-\']+|\(|\)|,|\"", gaps=False)
 
-def extract_ingredients(model, phrase: str):
-  normalized_phrase = normalize_input(phrase)
-  tokens = TOKENIZER.tokenize(normalized_phrase)
-  features = [extract_feature(token, index, tokens) for (index, token) in enumerate(tokens)]
-  prediction = model.predict([features])
+def extract_ingredients(model, phrases: str):
+    all_features = []
+    all_tokens = []
 
-  return list(zip(prediction[0], tokens))
+    for phrase in phrases:
+        normalized_phrase = normalize_input(phrase)
+        tokens = TOKENIZER.tokenize(normalized_phrase)
+        features = [extract_feature(token, index, tokens) for (index, token) in enumerate(tokens)]
+
+        all_features.append(features)
+        all_tokens.append(tokens)
+
+    predictions = model.predict(all_features)
+
+    return list(zip(predictions, all_tokens))
 
 def is_inside_parens(index: int, all_tokens):
     if all_tokens[index] in ["(", ")"]:

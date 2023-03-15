@@ -8,6 +8,7 @@
 html,
 body {
   background-color: var(--color-beige);
+  font-size: 18px;
 }
 
 a,
@@ -85,6 +86,11 @@ button {
 
 .recipe .recipe-source-text {
   word-break: break-all;
+}
+
+.recipe span[data-label='QTY'],
+.recipe span[data-label='UNIT'] {
+  font-weight: bold;
 }
 
 .heading-with-button {

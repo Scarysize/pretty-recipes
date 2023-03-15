@@ -1,5 +1,6 @@
 (ns server
-  (:require [org.httpkit.server :refer [run-server]]
+  (:require [clojure.tools.logging :refer [info]]
+            [org.httpkit.server :refer [run-server]]
             [compojure.core :refer [routes GET POST]]
             [hiccup.page :refer [html5]]
             [ring.middleware.params :refer [wrap-params]]
@@ -9,7 +10,8 @@
             [ring.util.response :refer [not-found]]
             [ring.logger :as logger]
 
-            [pretty-recipes :refer [extract-recipe]]
+            [scraper :refer [extract-recipe]]
+            [structured-ingredients :refer [fetch-structured-data]]
             [views.index]
             [views.recipe]
             [views.collection]))
@@ -21,6 +23,10 @@
 
 (def empty-recipe {:title "" :source "" :ingredients [] :directions []})
 
+(defn enriched-recipe [recipe]
+  (let [labelled-ingredients (fetch-structured-data (:ingredients recipe))]
+    (assoc recipe :labelled-ingredients labelled-ingredients)))
+
 (def all-routes
   (routes
    (GET "/" [] (serve-html (html5 views.index/html-tree)))
@@ -28,7 +34,7 @@
    (POST "/recipe" [recipe-url] (if-let [url recipe-url]
                                   ;; Guard against an empty recipe url
                                   (if-let [recipe (extract-recipe url)]
-                                    (serve-html (html5 (views.recipe/html-tree recipe)))
+                                    (serve-html (html5 (views.recipe/html-tree (enriched-recipe recipe))))
                                     (not-found "Could not parse recipe"))
                                   (not-found "No recipe url supplied")))
    (GET "/collection" [] (serve-html (html5 views.collection/html-tree)))))
@@ -41,6 +47,8 @@
       (wrap-not-modified)
       (wrap-params)))
 
+(def port 8888)
+
 (defn -main [& _args]
-  (run-server handler {:port 8888})
-  (println "Started server"))
+  (run-server handler {:port port})
+  (info (str "Started server on port: " port)))

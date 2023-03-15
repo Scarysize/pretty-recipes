@@ -8,8 +8,8 @@ print("Loaded model from file")
 
 @post("/ingredients")
 def ingredients():
-  phrase = request.json["phrase"]
-  labels = extract_ingredients(model, phrase)
+  phrases = request.json["phrases"]
+  labels = extract_ingredients(model, phrases)
   return {"labels": labels}
 
 @get("/health")

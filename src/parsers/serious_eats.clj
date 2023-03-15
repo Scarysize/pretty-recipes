@@ -55,7 +55,6 @@
   (text-content (first (s/select (s/tag :title) doc))))
 
 (defn extract-recipe [doc url]
-  (prn (ingredients-container doc))
   {:title (extract-title doc)
    :ingredients (extract-ingredients doc)
    :directions (extract-directions doc)

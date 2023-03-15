@@ -1,4 +1,4 @@
-(ns pretty-recipes
+(ns scraper
   (:gen-class)
   (:require [clojure.string :as str]
             [hickory.core :as hickory]
@@ -18,7 +18,7 @@
       hickory/parse
       hickory/as-hickory))
 
-(def parser-lookup
+(def parser-host-mapping
   {"www.seriouseats.com" serious-eats/extract-recipe
    "www.kingarthurbaking.com" kingarthurbaking/extract-recipe})
 
@@ -37,14 +37,14 @@
 (defn blog-parser [doc url]
   (if-let [parser (find-blog-parser doc)]
     (do
-      (println (str "Chose a blog parser: " (:name parser)))
+      (info (str "Using a blog parser: " (:name parser) "for url: " url))
       ((:parse-fn parser) doc url))
     nil))
 
 (defn parser-for-url [url]
   (let [jurl (new java.net.URI url)
         host (. jurl getHost)]
-    (get parser-lookup host blog-parser)))
+    (get parser-host-mapping host blog-parser)))
 
 (defn extract-recipe [url]
   (if-let [parse-fn (parser-for-url url)]
