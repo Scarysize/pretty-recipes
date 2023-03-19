@@ -4,7 +4,7 @@
             [hickory.core :as hickory]
             [hickory.render :refer [hickory-to-html]]
             [hickory.select :as s]
-            [pretty-recipes :refer [download-doc]]
+            [scraper :refer [download-doc]]
             [java-time.api :as jt]))
 
 (def db {:classname   "org.sqlite.JDBC"

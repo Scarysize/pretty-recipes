@@ -7,6 +7,7 @@
    [ring.middleware.not-modified :refer [wrap-not-modified]]
    [ring.middleware.resource :refer [wrap-resource]]
    [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
+   [ring.util.response :refer [response]]
    [ring.logger :as logger]
    [clojure.java.jdbc :as j]))
 
@@ -36,18 +37,17 @@
 
 (def all-routes
   (routes
-   (GET "/" [] (serve-html "hi"))
-   (GET "/ingredients.nextEmpty" [])))
+   (GET "/ingredients.getNextEmpty" [] (response (empty-most-frequent-ingr)))))
 
 (def handler
   (-> all-routes
       (logger/wrap-log-response)
       (wrap-resource "public-label")
+      (wrap-json-response)
       (wrap-content-type)
       (wrap-not-modified)
       (wrap-params)
-      (wrap-json-body)
-      (wrap-json-response)))
+      (wrap-json-body)))
 
 (defn -main [& _args]
   (run-server handler {:port 8888})

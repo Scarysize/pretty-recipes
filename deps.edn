@@ -14,4 +14,14 @@
         org.xerial/sqlite-jdbc {:mvn/version "3.40.1.0"}}
  :aliases {:uberdeps {:replace-deps {uberdeps/uberdeps {:mvn/version "1.2.0"}}
                       :replace-paths []
-                      :main-opts ["-m" "uberdeps.uberjar"]}}}
+                      :main-opts ["-m" "uberdeps.uberjar"]}
+           :test {:extra-deps {lambdaisland/kaocha {:mvn/version "1.80.1274"}}
+                  :exec-fn kaocha.runner/exec-fn
+                  :extra-paths ["test"]
+                  :exec-args {}}
+           :watch-test {:extra-deps {lambdaisland/kaocha {:mvn/version "1.80.1274"}}
+                        :exec-fn kaocha.runner/exec-fn
+                        :extra-paths ["test"]
+                        :exec-args {:watch? true
+                                    :skip-meta :slow
+                                    :fail-fast? true}}}}
