@@ -17,7 +17,7 @@
 
 (def footer
   [:footer
-   [:p "© 2023 Franz Laage - hello[at]pretty-recip.es - " [:a {:href "/licenses.html" :style "color: #222"} "Credits"]]])
+   [:a {:href "/imprint.html" :style "color: #222"} "Imprint"]])
 
 (def scripts
   (seq [[:script {:src "/recipe.js"}]

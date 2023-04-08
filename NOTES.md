@@ -48,19 +48,16 @@ CREATE TABLE IF NOT EXISTS urls(
 );
 ```
 
-# Ingredient Parsing
+# Linking ingredients in directions
 
-## Normalization steps
-
-- Replace fractions with like ⅛ with 1/2
-- Remove all "For the..." ingredients
-- Cast all to lower case
-- Trim all
-
-## Labeling tool
-
-- Present ingredients split on spaces
-- Mark word, label as quantity, unit, name, comment, range-end
-  - Keyboard shortcuts, space to lock, last space to submit
-  - Store result
-  - Then the next ingredients loads
+- For a labelled ingredient phrase (labels: qty, unit, parens, other)
+- Consider all "other" labels
+  - Ignore everything in parens
+  - ignore non-words
+  - ignore stuff after a comma
+- Take the last of the remaining tokens, assume that's the ingredient
+  - Alternatively do below steps for each of the remaining tokens. Backt to front.
+- Take a direction phrase
+- Tokenize the direction phrase, split at space
+- For each token check whether it fits to the ingredient token
+  - If multiple ingredient tokens match, include more ingredient tokens in match.

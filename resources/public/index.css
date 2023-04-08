@@ -55,19 +55,19 @@ input[type='url'] {
   outline: none;
   border: 1px solid var(--color-neutral-dark);
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 input[type='submit'],
 button {
   -webkit-appearance: none;
   appearance: none;
-  font-size: 16px;
+  font-size: 18px;
   min-height: 30px;
   margin-top: 5px;
   border: none;
   border-radius: 4px;
-  padding: 2px 5px;
+  padding: 6px 10px;
   color: var(--color-neutral-light);
   background-color: var(--color-neutral-dark);
   cursor: pointer;
@@ -88,9 +88,9 @@ button {
   word-break: break-all;
 }
 
-.recipe span[data-label='QTY'],
-.recipe span[data-label='UNIT'] {
-  font-weight: bold;
+.recipe span[data-label='unit'],
+.recipe span[data-label='qty'] {
+  font-weight: bolder;
 }
 
 .heading-with-button {
@@ -118,7 +118,6 @@ button {
 }
 
 #recipe-directions {
-  font-size: 17px;
   line-height: 28px;
 }
 

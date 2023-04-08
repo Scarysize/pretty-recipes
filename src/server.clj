@@ -1,20 +1,20 @@
 (ns server
   (:require [clojure.tools.logging :refer [info]]
-            [org.httpkit.server :refer [run-server]]
-            [compojure.core :refer [routes GET POST]]
+            [compojure.core :refer [GET POST routes]]
             [hiccup.page :refer [html5]]
-            [ring.middleware.params :refer [wrap-params]]
+            [labels.labelling :refer [label-ingredients]]
+            [labels.rules.rules :refer [apply-rules]]
+            [org.httpkit.server :refer [run-server]]
+            [ring.logger :as logger]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.middleware.not-modified :refer [wrap-not-modified]]
+            [ring.middleware.params :refer [wrap-params]]
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.util.response :refer [not-found]]
-            [ring.logger :as logger]
-
             [scraper :refer [extract-recipe]]
-            [structured-ingredients :refer [fetch-structured-data]]
+            [views.collection]
             [views.index]
-            [views.recipe]
-            [views.collection]))
+            [views.recipe]))
 
 (defn serve-html [body]
   {:status 200
@@ -24,8 +24,9 @@
 (def empty-recipe {:title "" :source "" :ingredients [] :directions []})
 
 (defn enriched-recipe [recipe]
-  (let [labelled-ingredients (fetch-structured-data (:ingredients recipe))]
-    (assoc recipe :labelled-ingredients labelled-ingredients)))
+  (let [labelled-ingredients (label-ingredients (:ingredients recipe))
+        cleaned (apply-rules labelled-ingredients)]
+    (assoc recipe :labelled-ingredients cleaned)))
 
 (def all-routes
   (routes

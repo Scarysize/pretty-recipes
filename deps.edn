@@ -22,6 +22,7 @@
            :watch-test {:extra-deps {lambdaisland/kaocha {:mvn/version "1.80.1274"}}
                         :exec-fn kaocha.runner/exec-fn
                         :extra-paths ["test"]
+                        :focus-meta [:only]
                         :exec-args {:watch? true
                                     :skip-meta :slow
                                     :fail-fast? true}}}}

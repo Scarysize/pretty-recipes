@@ -1,27 +1,13 @@
 (ns views.recipe
-  (:require [views.common]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [views.common]
+            [views.ingredients :refer [ingredient-list]]))
 
 (def protocol-pattern #"(http|https):\/\/")
 
 (defn remove-protocol [url]
   (str/replace-first url protocol-pattern ""))
 
-(defn lablled-ingredient [{:keys [text label]}]
-  [:span {:data-label label}
-   text
-   (if (= text "(")
-     ""
-     " ")])
-
-(defn ingredient-list [recipe]
-  (if-let [lablled (:labelled-ingredients recipe)]
-    [:ul {:id "recipe-ingredients" :class "ingredient-list--labelled"}
-     (for [l lablled]
-       [:li (map lablled-ingredient l)])]
-    [:ul {:id "recipe-ingredients"}
-     (for [i (:ingredients recipe)]
-       [:li i])]))
 
 (defn html-tree [recipe]
   [:html {:lang "en"}
