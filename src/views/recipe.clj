@@ -20,9 +20,7 @@
      [:h1 {:id "recipe-title"} (:title recipe)]
      [:p {:class "recipe-source-text"} "From " [:a {:href (:source recipe) :id "recipe-source"} (remove-protocol (:source recipe))]]
 
-     [:div.heading-with-button
-      [:h2 "Ingredients"]
-      [:button {:class "save-btn" :onclick "saveRecipe(this)"} "Save"]]
+     [:h2 "Ingredients"]
 
      (ingredient-list recipe)
 

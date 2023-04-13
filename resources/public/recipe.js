@@ -1,4 +1,7 @@
-const INDEX_KEY = 'pretty-recipes.index';
+const OLD_KEYS = ['pretty-recipes.index'];
+const INDEX_KEY = 'pretty-recipes.index.v2023-04-08';
+
+// OLD_KEYS.forEach(key => localStorage.removeItem(key));
 
 function urlToKey(url) {
   return btoa(url);
@@ -211,7 +214,7 @@ function renderCollection() {
     )})`;
     host.classList.add('recipe-host');
 
-    anchor.href = `/recipe/${slug}`;
+    anchor.href = `/recipe?recipe-url=${recipe.source}`;
     anchor.textContent = recipe.title;
 
     item.appendChild(anchor);

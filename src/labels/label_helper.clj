@@ -5,6 +5,9 @@
 (defn is-unit [label]
   (= (:label label) ::l/unit))
 
+(defn is-qty [label]
+  (= (:label label) ::l/qty))
+
 (defn is-open-parens [token]
   (= (:label token) ::l/parens-open))
 
@@ -17,6 +20,11 @@
 
 (defn unit [label]
   (if (is-unit label)
+    (:value label)
+    nil))
+
+(defn qty [label]
+  (if (is-qty label)
     (:value label)
     nil))
 

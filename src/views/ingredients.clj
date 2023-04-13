@@ -1,6 +1,6 @@
 (ns views.ingredients
   (:require [labels.label-helper :refer [is-close-parens is-comma
-                                         is-open-parens is-unit]]
+                                         is-open-parens is-qty is-unit qty]]
             [labels.labelling :as l]
             [labels.unit :as u]))
 
@@ -43,15 +43,27 @@
   (if (some? cur)
     (for [txt (token-text cur next)]
       (if (= txt :space)
-        [:span " "]
+        " "
         [:span {:data-label (:label cur)} txt]))
     nil))
 
+(defn quantity-element [tokens]
+  (if-let [qty-token (first (filter is-qty tokens))]
+    [:div {:class "ingredient__quantity"} (qty qty-token)]
+    [:div {:class "ingredient__quantity"}]))
+
+(defn remove-first [pred coll]
+  (let [[before non-pred-and-after] (split-with (complement pred) coll)]
+    (concat before (rest non-pred-and-after))))
+
 (defn ingredient-list [recipe]
   (if-let [ingredients (:labelled-ingredients recipe)]
-    [:ul {:id "recipe-ingredients" :class "ingredient-list--labelled"}
+    [:ul {:id "recipe-ingredients" :class "ingredient-list"}
      (for [ingredient-tokens ingredients]
-       [:li (map labelled-ingredient (partition 2 1 nil ingredient-tokens))])]
+       [:li {:class "ingredient"}
+        (quantity-element ingredient-tokens)
+        [:div {:class "ingredient__label"}
+         (map labelled-ingredient (partition 2 1 nil (remove-first is-qty ingredient-tokens)))]])]
 
     [:ul {:id "recipe-ingredients"}
      (for [i (:ingredients recipe)]

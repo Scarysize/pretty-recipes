@@ -10,10 +10,10 @@
    [:body
     [:main
      [:h1 "Pretty Recipes"]
-     [:form {:method "post" :action "/recipe" :onsubmit "submitRecipe(event)"}
+     [:form {:method "get" :action "/recipe" :onsubmit "submitRecipe(event)"}
       [:input {:type "url" :name "recipe-url" :placeholder "https://www.seriouseats.com/hoppin-john" :required "true"}]
       [:input {:type "submit" :value "Make it pretty" :onsubmit "submitRecipe(event)"}]
-      [:p.collection-link "or check your " [:a {:href "collection"} "saved recipes"]]]
+      #_[:p.collection-link "or check your " [:a {:href "collection"} "saved recipes"]]]
      [:p {:style "text-align: center;"} "Paste a link to a recipe to get a cleaned up version."]
      [:section.supported-sites
       [:p "Supported sites"]
