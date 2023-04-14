@@ -18,19 +18,18 @@
     views.common/header
     [:main {:class "recipe"}
      [:h1 {:id "recipe-title"} (:title recipe)]
-     [:p {:class "recipe-source-text"} "From " [:a {:href (:source recipe) :id "recipe-source"} (remove-protocol (:source recipe))]]
 
-     [:h2 "Ingredients"]
+     [:div.ingredients
+      [:h2 "Ingredients"]
+      (ingredient-list recipe)]
 
-     (ingredient-list recipe)
+     [:div.directions
+      [:h2 "Directions"]
+      [:ol {:id "recipe-directions"}
+       (for [d (:directions recipe)]
+         [:li d])]]]
 
-     [:h2 "Directions"]
-     [:ol {:id "recipe-directions"}
-      (for [d (:directions recipe)]
-        [:li d])]]
+    [:p.recipe-source-text "&rarr; " [:a {:href (:source recipe) :id "recipe-source"} (remove-protocol (:source recipe))]]
 
-    (if-let [slug (:slug recipe)]
-      [:div {:data-slug slug :style "display: none;"}]
-      nil)
     views.common/scripts
     views.common/footer]])

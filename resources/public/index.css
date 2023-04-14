@@ -1,5 +1,6 @@
 :root {
   --color-neutral-dark: #222;
+  --color-neutral-medium: #c8bca9;
   --color-neutral-light: #f2f2f2;
   --color-beige: #faecd5;
   --color-primary: #005b4c;
@@ -23,7 +24,7 @@ header nav a {
 }
 
 header {
-  border-bottom: 1px solid var(--color-neutral-dark);
+  border-bottom: 1px solid var(--color-neutral-medium);
 }
 
 header nav {
@@ -91,6 +92,15 @@ button {
   word-break: break-all;
 }
 
+.recipe-source-text {
+  margin-bottom: 1.5rem;
+  word-break: break-all;
+}
+
+.ingredients {
+  margin-bottom: 3rem;
+}
+
 .ingredient-list {
   display: block;
   list-style: none;
@@ -100,7 +110,7 @@ button {
 
 .ingredient {
   display: flex;
-  border-bottom: 1px solid color(srgb 0.795 0.7348 0.6559);
+  border-bottom: 1px solid var(--color-neutral-medium);
 }
 
 .ingredient__quantity {
@@ -108,18 +118,22 @@ button {
   padding: 10px 3px 0;
   text-align: center;
   flex-shrink: 0;
-  border-right: 1px solid color(srgb 0.795 0.7348 0.6559);
+  border-right: 1px solid var(--color-neutral-medium);
   margin-right: 5px;
   font-weight: bold;
 }
 
 .ingredient__label {
-  border-left: 1px solid color(srgb 0.795 0.7348 0.6559);
+  border-left: 1px solid var(--color-neutral-medium);
   padding: 10px;
 }
 
 .ingredient__label span:first-child {
   text-transform: capitalize;
+}
+
+.ingredient__label span[data-label='unit'] {
+  font-weight: bold;
 }
 
 #recipe-directions li {
