@@ -143,7 +143,7 @@ button {
   text-transform: capitalize;
 }
 
-.ingredient__label span[data-label='unit'] {
+.ingredient__label span[data-label='unit']:first-child {
   font-weight: bold;
 }
 
