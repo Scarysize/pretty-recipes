@@ -25,11 +25,13 @@
 
      [:div.directions
       [:h2 "Directions"]
-      [:ol {:id "recipe-directions"}
-       (for [d (:directions recipe)]
-         [:li d])]]]
+      [:ul#recipe-directions.direction-list
+       (for [[index, step] (map-indexed vector (:directions recipe))]
+         [:li.direction
+          [:div.direction__index (format "%02d" (inc index))]
+          [:div.direction__text step]])]]
 
-    [:p.recipe-source-text "&rarr; " [:a {:href (:source recipe) :id "recipe-source"} (remove-protocol (:source recipe))]]
+     [:p.recipe-source-text "&rarr; " [:a {:href (:source recipe) :id "recipe-source"} (remove-protocol (:source recipe))]]]
 
     views.common/scripts
     views.common/footer]])

@@ -48,23 +48,20 @@
     nil))
 
 (defn quantity-element [tokens]
-  (if-let [qty-token (first (filter is-qty tokens))]
-    [:div {:class "ingredient__quantity"} (qty qty-token)]
-    [:div {:class "ingredient__quantity"}]))
+  [:div.ingredient__quantity
+   (if-let [qty-token (first (filter is-qty tokens))]
+     (qty qty-token)
+     "")])
 
 (defn remove-first [pred coll]
   (let [[before non-pred-and-after] (split-with (complement pred) coll)]
     (concat before (rest non-pred-and-after))))
 
 (defn ingredient-list [recipe]
-  (if-let [ingredients (:labelled-ingredients recipe)]
-    [:ul {:id "recipe-ingredients" :class "ingredient-list"}
+  (let [ingredients (:labelled-ingredients recipe)]
+    [:ul#recipe-ingredients.ingredient-list
      (for [ingredient-tokens ingredients]
-       [:li {:class "ingredient"}
+       [:li.ingredient
         (quantity-element ingredient-tokens)
-        [:div {:class "ingredient__label"}
-         (map labelled-ingredient (partition 2 1 nil (remove-first is-qty ingredient-tokens)))]])]
-
-    [:ul {:id "recipe-ingredients"}
-     (for [i (:ingredients recipe)]
-       [:li i])]))
+        [:div.ingredient__label
+         (map labelled-ingredient (partition 2 1 nil (remove-first is-qty ingredient-tokens)))]])]))

@@ -7,8 +7,10 @@
 
 ## Runing locally
 
+This runs the server with hot-reloading. No restart necessary for most changes.
+
 ```
-clj -M -m server
+clj -M:start
 ```
 
 ## Build JAR
