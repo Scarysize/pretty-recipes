@@ -1,6 +1,6 @@
-(ns labels.prep-test
+(ns labels.preprocess-test
   (:require [clojure.test :refer :all]
-            [labels.prep :as prep]))
+            [labels.preprocess :as prep]))
 
 (deftest fractions
   (let [replaced (prep/replace-fractions "1 1/2 tsp, 1/3 slices")]

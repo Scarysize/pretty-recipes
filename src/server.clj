@@ -4,7 +4,6 @@
             [compojure.core :refer [GET POST routes]]
             [hiccup.page :refer [html5]]
             [labels.labelling :refer [label-ingredients]]
-            [labels.rules.rules :refer [apply-rules]]
             [org.httpkit.server :refer [run-server]]
             [ring.logger :as logger]
             [ring.middleware.content-type :refer [wrap-content-type]]
@@ -26,9 +25,8 @@
 (def empty-recipe {:title "" :source "" :ingredients [] :directions []})
 
 (defn enriched-recipe [recipe]
-  (let [labelled-ingredients (label-ingredients (:ingredients recipe))
-        cleaned (apply-rules labelled-ingredients)]
-    (assoc recipe :labelled-ingredients cleaned)))
+  (let [labelled-ingredients (label-ingredients (:ingredients recipe))]
+    (assoc recipe :labelled-ingredients labelled-ingredients)))
 
 (defn handle-recipe-query [recipe-url]
   (if-let [url recipe-url]

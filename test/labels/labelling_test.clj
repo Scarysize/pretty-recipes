@@ -7,11 +7,11 @@
   (label-ingredient-phrase phrase))
 
 (defn is-unit [label expected-unit]
-  (is (= ::l/unit (:label label)) (str "Not a unit " label))
+  (is (= :unit (:label label)) (str "Not a unit " label))
   (is (= expected-unit (:value label)) (str "Expected unit: " expected-unit ", got: " (:value label))))
 
 (defn is-qty [label expected-qty]
-  (is (= ::l/qty (:label label)) (str "Not a qty " label))
+  (is (= :qty (:label label)) (str "Not a qty " label))
   (is (= expected-qty (:value label)) (str "Expected qty: " expected-qty ", got: " (:value label))))
 
 (deftest units

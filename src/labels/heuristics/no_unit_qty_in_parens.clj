@@ -1,15 +1,14 @@
-(ns labels.rules.no-unit-qty-in-parens
-  (:require [labels.label-helper :refer [is-unit is-vol-or-weight labels unit]]
-            [labels.labelling :as l]))
+(ns labels.heuristics.no-unit-qty-in-parens
+  (:require [labels.label-helpers :refer [unit? is-vol-or-weight labels unit]]))
 
-(def parens-pattern [::l/parens-open ::l/qty ::l/unit ::l/parens-close])
+(def parens-pattern [:parens-open :qty :unit :parens-close])
 
 (defn is-label-pattern [ingredients]
   (and (= (labels ingredients) parens-pattern)
        (is-vol-or-weight (unit (nth ingredients 2)))))
 
 (defn has-multiple-units [ingredients]
-  (> (count (filter is-unit ingredients)) 1))
+  (> (count (filter unit? ingredients)) 1))
 
 (defn drop-unit-qty-in-parens [ingredients]
   (let [filtered (reduce

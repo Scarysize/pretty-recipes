@@ -138,7 +138,7 @@ button {
   padding: 10px;
 }
 
-.ingredient__label span:first-child,
+.ingredient__label span:first-child:not(span[data-label='unit']),
 .direction__text span:first-child {
   text-transform: capitalize;
 }

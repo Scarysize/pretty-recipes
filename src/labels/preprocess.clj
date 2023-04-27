@@ -1,4 +1,4 @@
-(ns labels.prep
+(ns labels.preprocess
   (:require [clojure.string :as str]))
 
 (java.util.Locale/setDefault java.util.Locale/US)
@@ -9,14 +9,14 @@
   [fraction-str]
   (->> (str/split (str/triml fraction-str) #" ")
        (map (fn [t] (map #(Integer/parseInt %1) (str/split t #"/"))))
-       (map #(reduce / 1 %1))
+       (map #(reduce / %1))
        (reduce + 0)
        double))
 
 (defn replace-fraction [[match]]
   (let [fraction (parse-fraction match)
         space (if (str/starts-with? match " ") " " "")]
-    (str space (format "%.2g" fraction))))
+    (str space (format "%.2f" fraction))))
 
 (def fraction-part-expr #"(\d*\s*\d/\d+)")
 
