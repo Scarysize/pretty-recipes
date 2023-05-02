@@ -20,5 +20,4 @@
    [:a {:href "/imprint.html" :style "color: #222"} "Imprint"]])
 
 (def scripts
-  (seq [#_[:script {:src "/recipe.js"}]
-        [:script {:src "//gc.zgo.at/count.js" :async "true" :data-goatcounter "https://pretty-recipes.goatcounter.com/count"}]]))
+  (seq [[:script {:src "//gc.zgo.at/count.js" :async "true" :data-goatcounter "https://pretty-recipes.goatcounter.com/count"}]]))

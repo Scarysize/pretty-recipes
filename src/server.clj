@@ -11,18 +11,21 @@
             [ring.middleware.params :refer [wrap-params]]
             [ring.middleware.reload :as reload]
             [ring.middleware.resource :refer [wrap-resource]]
-            [ring.util.response :refer [not-found]]
             [scraper :refer [extract-recipe]]
             [views.collection]
             [views.index]
-            [views.recipe]))
+            [views.recipe]
+            [views.error]))
 
-(defn serve-html [body]
-  {:status 200
-   :headers {"Content-Type" "text/html"}
-   :body body})
+(defn serve-html
+  ([body] (serve-html body 200))
+  ([body status]
+   {:status status
+    :headers {"Content-Type" "text/html"}
+    :body body}))
 
-(def empty-recipe {:title "" :source "" :ingredients [] :directions []})
+(defn not-found [error-msg]
+  (serve-html (html5 (views.error/html-tree error-msg 404))))
 
 (defn enriched-recipe [recipe]
   (let [labelled-ingredients (label-ingredients (:ingredients recipe))]
@@ -38,7 +41,6 @@
 (def router
   (routes
    (GET "/" [] (serve-html (html5 views.index/html-tree)))
-   (GET  "/recipe/:slug" [slug] (serve-html (html5 (views.recipe/html-tree (assoc empty-recipe :slug slug)))))
    (GET "/recipe" [recipe-url] (handle-recipe-query recipe-url))
    (POST "/recipe" [recipe-url] (handle-recipe-query recipe-url))
    (GET "/collection" [] (serve-html (html5 views.collection/html-tree)))))
