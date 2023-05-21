@@ -6,6 +6,7 @@
 
     "cup" ::cup
     "cups" ::cup
+    "c." ::cup
 
     "g" ::gram
     "gr" ::gram
@@ -18,10 +19,12 @@
     "teaspoons" ::tsp
     "teaspoon" ::tsp
     "tsp" ::tsp
+    "tsp." ::tsp
 
     "tablespoons" ::tbsp
     "tablespoon" ::tbsp
     "tbsp" ::tbsp
+    "tbsp." ::tbsp
 
     "pounds" ::lb
     "pound" ::lb
@@ -54,6 +57,8 @@
     "litres" ::l
 
     "f" ::deg-f
+
+    "slices" ::slices
 
     nil))
 

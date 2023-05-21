@@ -1,6 +1,6 @@
 (ns dom)
 
-(def text-ignore-list #{:figure :aside})
+(def text-ignore-list #{:figure :aside :style})
 
 (defn text-content [{content :content}]
   (->> content

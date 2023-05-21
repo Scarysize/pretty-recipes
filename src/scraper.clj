@@ -1,13 +1,14 @@
 (ns scraper
   (:gen-class)
-  (:require [clojure.string :as str]
-            [hickory.core :as hickory]
-            [clj-http.client :as http-client]
+  (:require [clj-http.client :as http-client]
+            [clojure.string :as str]
             [clojure.tools.logging :refer [info]]
-            [parsers.kingarthurbaking :as kingarthurbaking]
-            [parsers.serious-eats :as serious-eats]
+            [hickory.core :as hickory]
             [parsers.blog-parsers.tasty-recipes :as tasty-recipes]
             [parsers.blog-parsers.wp-recipe-maker :as wp-recipe-maker]
+            [parsers.delish :as delish]
+            [parsers.kingarthurbaking :as kingarthurbaking]
+            [parsers.serious-eats :as serious-eats]
             [views.recipe]))
 
 (defn download-doc [url]
@@ -20,7 +21,8 @@
 
 (def parser-host-mapping
   {"www.seriouseats.com" serious-eats/extract-recipe
-   "www.kingarthurbaking.com" kingarthurbaking/extract-recipe})
+   "www.kingarthurbaking.com" kingarthurbaking/extract-recipe
+   "www.delish.com" delish/extract-recipe})
 
 (def blog-parsers [{:can-parse? tasty-recipes/can-parse?
                     :parse-fn tasty-recipes/extract-recipe

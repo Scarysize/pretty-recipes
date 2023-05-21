@@ -12,7 +12,6 @@
             [ring.middleware.reload :as reload]
             [ring.middleware.resource :refer [wrap-resource]]
             [scraper :refer [extract-recipe]]
-            [views.collection]
             [views.index]
             [views.recipe]
             [views.error]))
@@ -42,8 +41,7 @@
   (routes
    (GET "/" [] (serve-html (html5 views.index/html-tree)))
    (GET "/recipe" [recipe-url] (handle-recipe-query recipe-url))
-   (POST "/recipe" [recipe-url] (handle-recipe-query recipe-url))
-   (GET "/collection" [] (serve-html (html5 views.collection/html-tree)))))
+   (POST "/recipe" [recipe-url] (handle-recipe-query recipe-url))))
 
 (def request-handler
   (-> router
