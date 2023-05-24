@@ -58,7 +58,8 @@
 
     "f" ::deg-f
 
-    "slices" ::slices
+    "slices" ::slice
+    "slice" ::slice
 
     nil))
 

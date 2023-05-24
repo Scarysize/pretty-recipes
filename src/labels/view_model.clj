@@ -27,6 +27,7 @@
          ::u/qt [:space "quarts"]
          ::u/tbsp [:space "tablespoons"]
          ::u/tsp [:space "teaspoons"]
+         ::u/slice [:space "slices"]
          [(name unit)])
        (mapv #(if (= %1 :space)
                 {:text " "}
@@ -42,13 +43,13 @@
     []))
 
 (defn token-text [[cur next]]
-  (cond
-    (nil? next)          (render cur)
-    (open-parens? cur)   (render cur)
-    (close-parens? next) (render cur)
-    (comma? next)        (render cur)
-    (unit? next)         (render cur)
-    :else                (conj (render cur) {:text " "})))
+  (if (or (nil? next)
+          (open-parens? cur)
+          (close-parens? next)
+          (comma? next)
+          (unit? next))
+    (render cur)
+    (conj (render cur) {:text " "})))
 
 (defn build-label [ingredient-tokens]
   (->> ingredient-tokens

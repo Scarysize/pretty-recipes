@@ -1,6 +1,8 @@
 (ns views.index
   (:require [views.common]))
 
+(def example-url "/recipe?recipe-url=https%3A%2F%2Fwww.seriouseats.com%2Fclassic-italian-american-stuffed-shells")
+
 (def html-tree
   [:html {:lang "en"}
    [:head
@@ -13,14 +15,13 @@
      [:form {:method "get" :action "/recipe" :onsubmit "submitRecipe(event)"}
       [:input {:type "url" :name "recipe-url" :placeholder "https://www.seriouseats.com/hoppin-john" :required "true"}]
       [:input {:type "submit" :value "Make it pretty" :onsubmit "submitRecipe(event)"}]]
-     [:p {:style "text-align: center;"} "Paste a link to a recipe to get a cleaned up version."]
+     [:p {:style "text-align: center;"} "Paste a link to a recipe to get a cleaned up version. " [:a {:href example-url} "Try an example."]]
      [:section.supported-sites
       [:p "Supported sites"]
       [:ul
        [:li [:a {:href "https://www.kingarthurbaking.com"} "King Arthur Baking"]]
        [:li [:a {:href "https://www.seriouseats.com"} "Serious Eats"]]
        [:li [:a {:href "https://www.delish.com"} "Delish"]]
-       [:li "Blogs using " [:a {:href "https://www.wptasty.com/tasty-recipes"} "WP Tasty"]]
-       [:li "Blogs using " [:a {:href "https://wordpress.org/plugins/wp-recipe-maker/"} "WP Recipe Maker"]]]]]
+       [:li "Blogs using " [:a {:href "https://www.wptasty.com/tasty-recipes"} "WP Tasty"] " or " [:a {:href "https://wordpress.org/plugins/wp-recipe-maker/"} "WP Recipe Maker"]]]]]
     views.common/scripts
     views.common/footer]])
