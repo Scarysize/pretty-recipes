@@ -24,7 +24,7 @@
    (map tokenize)
    (map (fn [tokens] (mapv label-token tokens)))
    (map apply-heuristics)
-   (map to-view-model)))
+   (map-indexed #(to-view-model %2 %1))))
 
 (defn label-ingredients [phrases]
   (into [] labelling-pipeline phrases))

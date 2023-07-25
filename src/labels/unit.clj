@@ -61,6 +61,9 @@
     "slices" ::slice
     "slice" ::slice
 
+    "pinches" ::pinch
+    "pinch" ::pinch
+
     nil))
 
 (defn unit-type [unit]
