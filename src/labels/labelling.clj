@@ -1,5 +1,6 @@
 (ns labels.labelling
-  (:require [labels.heuristics.heuristics :refer [apply-heuristics]]
+  (:require [labels.fractions :refer [replace-fractions]]
+            [labels.heuristics.heuristics :refer [apply-heuristics]]
             [labels.preprocess :as prep]
             [labels.quantity :refer [try-quantity] :as q]
             [labels.tokenize :refer [tokenize]]
@@ -16,20 +17,9 @@
       (= token ")") {:label :parens-close}
       :else         {:label :other :value token})))
 
-(defn label-ingredient-phrase
-  "Transforms an ingredient phrase into a list of labels. The string is cleaned,
-   tokenized and then labelled. No heuristics applied."
-  [phrase]
-  (let [normalized (-> phrase
-                       prep/replace-fractions
-                       prep/split-qty-and-unit)
-        tokens (tokenize normalized)
-        labelled (mapv label-token tokens)]
-    labelled))
-
 (def labelling-pipeline
   (comp
-   (map prep/replace-fractions)
+   (map replace-fractions)
    (map prep/split-qty-and-unit)
    (map tokenize)
    (map (fn [tokens] (mapv label-token tokens)))

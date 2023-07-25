@@ -19,10 +19,16 @@ clj -M:start
 clj -M:uberdeps
 ```
 
+## Watch tests
+
+```
+clj -X:watch-test
+```
+
 ## Run JAR
 
 ```
-java -cp target/serious-recipes.jar clojure.main -m server
+java -cp target/pretty-recipes.jar clojure.main -m server
 ```
 
 ## Operations

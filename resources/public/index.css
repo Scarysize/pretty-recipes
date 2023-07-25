@@ -88,6 +88,11 @@ button {
   font-size: 1.1rem;
 }
 
+.recipe h3 {
+  text-align: center;
+  font-size: 1rem;
+}
+
 .recipe .recipe-source-text {
   word-break: break-all;
 }
@@ -172,6 +177,10 @@ ul ::marker {
 .recipe-list .recipe-host {
   margin-left: 5px;
   font-size: 14px;
+}
+
+.recipe .downloads {
+  margin-bottom: 27px;
 }
 
 @media only screen and (max-width: 600px) {

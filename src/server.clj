@@ -30,18 +30,18 @@
   (let [labelled-ingredients (label-ingredients (:ingredients recipe))]
     (assoc recipe :labelled-ingredients labelled-ingredients)))
 
-(defn handle-recipe-query [recipe-url]
+(defn handle-recipe-query [recipe-url render]
   (if-let [url recipe-url]
     (if-let [recipe (extract-recipe url)]
-      (serve-html (html5 (views.recipe/html-tree (enriched-recipe recipe))))
+      (serve-html (html5 (render (enriched-recipe recipe))))
       (not-found "Could not parse recipe"))
     (not-found "No recipe url supplied")))
 
 (def router
   (routes
    (GET "/" [] (serve-html (html5 views.index/html-tree)))
-   (GET "/recipe" [recipe-url] (handle-recipe-query recipe-url))
-   (POST "/recipe" [recipe-url] (handle-recipe-query recipe-url))))
+   (GET "/recipe" [recipe-url] (handle-recipe-query recipe-url views.recipe/html-tree))
+   (POST "/recipe" [recipe-url] (handle-recipe-query recipe-url views.recipe/html-tree))))
 
 (def request-handler
   (-> router

@@ -1,25 +1,20 @@
 (ns views.ingredients
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [labels.fractions :refer [to-fraction]]))
 
-(defn frac [num denom]
-  [:span [:sup num] "&frasl;" [:sub denom]])
+(defn frac [[nom denom]]
+  [:span [:sup nom] "&frasl;" [:sub denom]])
 
 (defn format-qty [qty]
-  (if (= 0 (mod qty 1))
-    qty
-    (let [whole-part (int qty)
-          whole-part? (not= whole-part 0)
-          fraction (case (mod qty 1)
-                     0.125 (frac 1 8)
-                     0.25  (frac 1 4)
-                     0.33  (frac 1 3)
-                     0.5 (frac 1 2)
-                     0.75  (frac 3 4)
-                     nil)]
-      (cond
-        (and whole-part? (some? fraction)) [:span whole-part " " fraction]
-        (and (= whole-part 0) (some? fraction)) fraction
-        :else qty))))
+  (let [{:keys [integer fractional]} (to-fraction qty)]
+    (cond
+      ;; both parts
+      (and (seq fractional) (not (zero? integer))) [:span integer " " (frac fractional)]
+      ;; only fractional
+      (and (seq fractional) (zero? integer)) (frac fractional)
+      ;; only integer
+      (and (not (seq fractional)) (not (zero? integer))) [:span integer]
+      :else qty)))
 
 (defn format-quantities [txt]
   (if (= (:label txt) :qty)
@@ -27,7 +22,6 @@
     txt))
 
 (defn singularize [txt]
-  (prn txt)
   (if (= (:label txt) :unit)
     (update txt :text #(str/replace %1 #"s$" ""))
     txt))

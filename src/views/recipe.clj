@@ -31,7 +31,7 @@
           [:div.direction__index (format "%02d" (inc index))]
           [:div.direction__text step]])]]
 
-     [:p.recipe-source-text "&rarr; " [:a {:href (:source recipe) :id "recipe-source"} (remove-protocol (:source recipe))]]]
+     [:p.recipe-source-text "&rarr; " [:a {:href (:source recipe) :id "recipe-source"} (remove-protocol (:source recipe))]]
 
-    views.common/scripts
+     views.common/scripts]
     views.common/footer]])
