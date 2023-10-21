@@ -50,5 +50,9 @@
 
 (defn extract-recipe [url]
   (if-let [parse-fn (parser-for-url url)]
-    (parse-fn (download-doc url) url)
+    (let [recipe (parse-fn (download-doc url) url)]
+      {:title (:title recipe)
+       :ingredients (:ingredients recipe)
+       :directions (:directions recipe)
+       :source (:source recipe)})
     nil))

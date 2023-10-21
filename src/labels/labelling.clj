@@ -26,7 +26,7 @@
    (map apply-heuristics)
    (map-indexed #(to-view-model %2 %1))))
 
-(defn label-ingredients [phrases]
-  (into [] labelling-pipeline phrases))
+(defn label-ingredients [ingredients]
+  (into [] labelling-pipeline ingredients))
 
 
