@@ -49,8 +49,7 @@
       (wrap-resource "public")
       (wrap-content-type)
       (wrap-not-modified)
-      (wrap-params)
-      (reload/wrap-reload)))
+      (wrap-params)))
 
 (def port 8888)
 
